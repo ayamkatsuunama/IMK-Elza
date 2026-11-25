@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ubiquitous Computing – Teknologi Komputer di Mana Saja</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fcf1de;--ink:#f08a70;--txt:#6b3b33;--white:#fff;--pink:#f7b9d4;--blue:#b4c8f6;--salmon:#f5a089;--lime:#e4efbd;--yellow:#f4eab9;--sage:#b7d8b4;--lilac:#d3c3ea;--on:#6b3b33;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root[data-theme="dark"]{--bg:#2b2125;--txt:#ffe9df;--white:#3b2e33}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2b2125;--txt:#ffe9df;--white:#3b2e33}}
+html{scroll-behavior:smooth;scroll-padding-top:90px;color-scheme:light dark}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--txt);font-family:Nunito,system-ui,sans-serif;font-weight:500;line-height:1.7;overflow-x:hidden;padding-bottom:90px}
+h1,h2,h3,.pill{font-family:Fredoka,Nunito,sans-serif}
+a{color:inherit}
+/* nav */
+.nav{position:fixed;top:calc(env(safe-area-inset-top,0px) + 14px);left:50%;transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:6px;padding:10px 12px 10px 22px;width:min(920px,92vw);border-radius:999px;background:color-mix(in srgb,var(--salmon) 88%,transparent);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);box-shadow:0 8px 28px rgba(240,138,112,.35);transition:width .5s cubic-bezier(.2,.8,.2,1),padding .4s,background .4s;color:#fff}
+.nav b{font-family:Fredoka;font-size:15px;letter-spacing:.14em;margin-right:auto;white-space:nowrap}
+.nav a{text-decoration:none;font-weight:800;font-size:13px;padding:7px 14px;border-radius:999px;transition:.25s}
+.nav a:hover,.nav a.on{background:#fff;color:var(--ink)}
+.nav.small{width:min(560px,86vw);padding:6px 8px 6px 16px;background:color-mix(in srgb,var(--salmon) 72%,transparent)}
+.nav.small b{font-size:13px}.nav.small a{padding:5px 11px;font-size:12px}
+.tabs{display:none}
+/* common */
+.wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+.pill{display:inline-block;padding:8px 22px;border-radius:999px;font-weight:600;font-size:15px;color:var(--on)}
+h1{font-size:clamp(40px,8vw,84px);line-height:1;color:var(--ink);font-weight:700}
+h2{font-size:clamp(26px,4vw,38px);font-weight:600;margin:14px 0 18px;color:var(--ink)}
+p{max-width:68ch}p+p{margin-top:12px}
+section{padding:70px 0 40px;position:relative}
+.rv{opacity:0;transform:translateY(34px) scale(.97);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+.dec{position:absolute;pointer-events:none;animation:bob 5s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-12px) rotate(10deg)}}
+/* hero */
+.hero{padding-top:110px}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center;background:repeating-linear-gradient(90deg,var(--blue) 0 14px,var(--bg) 14px 28px);border-radius:28px;padding:44px 40px;border:3px solid var(--pink)}
+.hero-grid>div:first-child{background:var(--bg);padding:26px;border-radius:24px}
+.hero h1 span{display:block}
+.sub{font-size:19px;font-weight:800;margin:14px 0 20px}
+.btn{border:0;cursor:pointer;font:700 15px Fredoka;padding:12px 26px;border-radius:999px;background:var(--lime);color:var(--on);transition:transform .2s;position:relative;overflow:hidden}
+.btn:hover{transform:translateY(-3px) rotate(-2deg)}.btn:active,.card:active,.tilt:active{transform:scale(.92)}
+.blob{aspect-ratio:1;border-radius:38% 62% 55% 45%/48% 40% 60% 52%;background:var(--pink);display:grid;place-items:center;font-size:clamp(70px,12vw,120px);border:6px solid #fff;animation:morph 9s ease-in-out infinite;box-shadow:0 0 0 8px var(--blue)}
+@keyframes morph{50%{border-radius:55% 45% 40% 60%/55% 55% 45% 45%;transform:rotate(4deg)}}
+.author{margin-top:26px;background:var(--white);border:3px dashed var(--pink);border-radius:22px;padding:16px 20px;display:inline-block;min-width:min(100%,340px);transform:rotate(-1.5deg);transition:.3s}
+.author:hover{transform:rotate(1deg) scale(1.03)}
+.author h3{font-size:15px;color:var(--ink);margin-bottom:6px}
+.author dl{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;font-weight:700;font-size:15px}
+.author dt{opacity:.65}.author dd{margin:0}
+.marq{overflow:hidden;white-space:nowrap;margin-top:28px;font:700 14px Fredoka;color:var(--ink);letter-spacing:.12em}
+.marq div{display:inline-block;animation:mq 28s linear infinite}
+@keyframes mq{to{transform:translateX(-50%)}}
+/* wave edges */
+.wave{height:22px;background:radial-gradient(circle at 50% 100%,var(--white) 19px,transparent 20px) 0 0/40px 22px repeat-x}
+.wave.d{background:radial-gradient(circle at 50% 0,var(--white) 19px,transparent 20px) 0 0/40px 22px repeat-x}
+.white{background:var(--white)}
+/* pengertian */
+.def{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.card{background:var(--white);border:3px dashed var(--pink);border-radius:26px;padding:22px 24px;cursor:pointer;transition:transform .25s}
+.card:hover{transform:translateY(-5px)}
+.def .card:nth-child(2){border-color:var(--blue)}.def .card:nth-child(3){border-color:var(--sage)}.def .card:nth-child(4){border-color:var(--lilac)}
+/* karakter */
+.chars{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.tilt{padding:20px 22px;border-radius:6px;color:var(--on);cursor:pointer;transition:transform .25s;transform:rotate(var(--r,0deg))}
+.tilt:hover{transform:rotate(0) scale(1.04)}
+.tilt h3{font-size:19px;margin-bottom:6px}.tilt p{font-size:15px;line-height:1.55}
+/* contoh */
+.rail{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 4px 20px;scrollbar-width:none;align-items:flex-start}
+.rail::-webkit-scrollbar{display:none}
+.item{flex:0 0 min(310px,80vw);scroll-snap-align:start;background:var(--white);border-radius:30px;padding:12px;border:3px solid var(--pink)}
+.item .pic{height:190px;border-radius:22px;display:grid;place-items:center;font-size:84px;position:relative;background:var(--c)}
+.item .tag{position:absolute;top:10px;right:10px;background:#fff;color:var(--ink);font:700 13px Fredoka;padding:3px 12px;border-radius:999px}
+.item h3{margin:14px 8px 6px;font-size:20px;color:var(--ink)}
+.item .t{margin:0 8px;font-size:15px;line-height:1.6}
+.more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s}
+.more>div{overflow:hidden}.item.open .more{grid-template-rows:1fr}.more p{margin:10px 8px 0;font-size:15px;line-height:1.6}
+.item button{margin:14px 8px 6px;width:calc(100% - 16px);background:var(--blue)}
+.arrows{display:flex;gap:10px;justify-content:center}
+.arrows button{width:44px;height:44px;padding:0;background:var(--pink);font-size:18px}
+/* manfaat */
+.ben{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ben .b{padding:16px 22px;border-radius:999px;border:3px dashed var(--blue);background:var(--blue);color:var(--on);font-weight:800;cursor:pointer;transition:transform .25s;outline:4px solid var(--blue)}
+.ben .b:nth-child(3n+2){background:var(--yellow);border-color:var(--pink);outline-color:var(--yellow)}
+.ben .b:nth-child(3n){background:var(--lime);outline-color:var(--lime);border-color:var(--sage)}
+.ben .b:hover{transform:scale(1.04) rotate(-1deg)}
+.warn{margin-top:26px;padding:22px 26px;border-radius:26px;background:var(--pink);color:var(--on);font-weight:700}
+/* kesimpulan */
+.sale{display:grid;grid-template-columns:180px 1fr;gap:30px;align-items:center}
+.sale .blob{font-size:70px;animation-duration:7s;background:var(--lilac);box-shadow:0 0 0 6px var(--pink)}
+.sale h2{margin-top:10px}
+.sale p{font-size:17px}
+.sale p+p{margin-top:12px}
+/* referensi */
+.refs li{margin:10px 0;padding:12px 18px;border-radius:18px;background:var(--white);border:2px solid var(--blue);list-style:none;font-size:15px;word-break:break-word}
+.refs{padding:0;counter-reset:r}.refs a{color:var(--ink);font-weight:800}
+.foot{margin-top:60px;text-align:center;font:700 clamp(20px,4vw,30px) Fredoka}
+.foot span{display:inline-block;margin:4px;padding:4px 18px;border-radius:999px;color:var(--on)}
+.credit{background:var(--blue);color:var(--on);text-align:center;padding:12px 20px 20px;margin-top:30px;font-weight:800;font-size:14px}
+/* sparkle */
+.sp{position:fixed;z-index:99;pointer-events:none;font-size:22px;animation:pop .9s ease-out forwards}
+@keyframes pop{to{transform:translate(var(--x),var(--y)) rotate(240deg) scale(.4);opacity:0}}
+@media (max-width:760px){
+.nav{width:auto;padding:8px 20px;gap:0;max-width:92vw}.nav a{display:none}.nav b{margin:0}.nav.small{width:auto}
+.hero-grid{grid-template-columns:1fr;padding:22px 16px}.def,.ben,.chars,.sale{grid-template-columns:1fr}.sale .blob{width:130px}
+.tabs{display:flex;position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 12px);transform:translateX(-50%);width:min(440px,94vw);z-index:60;justify-content:space-around;padding:8px;border-radius:999px;background:color-mix(in srgb,var(--white) 78%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 8px 30px rgba(107,59,51,.25);border:2px solid var(--pink)}
+.tabs a{flex:1;text-align:center;text-decoration:none;font:600 11px Fredoka;padding:6px 0;border-radius:999px;color:var(--txt);transition:.3s}
+.tabs a i{display:block;font-style:normal;font-size:20px;line-height:1.2;transition:transform .3s}
+.tabs a.on{background:var(--pink);color:var(--on)}.tabs a.on i{transform:translateY(-3px) scale(1.2)}
+.tabs a:active i{transform:scale(.7)}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important}.rv{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+<nav class="nav" id="nav"><b>UBICOMP</b>
+<a href="#beranda">Beranda</a><a href="#konsep">Konsep</a><a href="#karakter">Karakteristik</a><a href="#contoh">Contoh</a><a href="#manfaat">Manfaat</a><a href="#referensi">Referensi</a></nav>
+<nav class="tabs" id="tabs">
+<a href="#beranda"><i>🏠</i>Beranda</a><a href="#konsep"><i>💡</i>Konsep</a><a href="#contoh"><i>🌸</i>Contoh</a><a href="#manfaat"><i>⭐</i>Manfaat</a><a href="#referensi"><i>📚</i>Referensi</a></nav>
+
+<header id="beranda" class="hero" data-s>
+<span class="dec" style="top:90px;right:4%;font-size:40px">🌸</span><span class="dec" style="top:46%;left:1%;font-size:28px;animation-delay:1s">⭐</span>
+<div class="wrap rv">
+<div class="hero-grid">
+<div>
+<span class="pill" style="background:var(--lime)">Materi Teknologi Komputer</span>
+<h1 style="margin-top:14px"><span>Ubiquitous</span><span>Computing</span></h1>
+<p class="sub">Teknologi Komputer di Mana Saja</p>
+<button class="btn" onclick="document.getElementById('konsep').scrollIntoView()">Mulai membaca</button>
+<div class="author"><h3>✿ Penulis</h3>
+<dl><dt>Nama</dt><dd>Elza Arsya Putri</dd><dt>NIM</dt><dd>8020250092</dd><dt>Kelas</dt><dd>01PT3</dd></dl></div>
+</div>
+<div class="blob" id="blob" role="img" aria-label="Ilustrasi perangkat pintar">📱⌚🏠</div>
+</div>
+<div class="marq"><div id="mq"></div></div>
+</div>
+</header>
+
+<div class="wave"></div>
+<div class="white"><section id="konsep" data-s style="padding-top:30px">
+<div class="wrap">
+<span class="pill rv" style="background:var(--pink)">1. Pengertian</span>
+<h2 class="rv">Pengertian Ubiquitous Computing</h2>
+<div class="def">
+<div class="card rv"><p>Ubiquitous Computing merupakan konsep penggunaan teknologi komputer yang dapat ditemukan dan digunakan di berbagai tempat dalam kehidupan sehari-hari. Pada konsep ini, kemampuan komputer tidak hanya terdapat pada komputer desktop atau laptop, tetapi juga ditanamkan ke dalam benda-benda yang sering digunakan manusia.</p></div>
+<div class="card rv" style="--d:.1s"><p>Istilah <i>ubiquitous</i> memiliki arti “ada di mana-mana”. Oleh karena itu, Ubiquitous Computing dapat diartikan sebagai teknologi komputasi yang hadir di berbagai lingkungan dan membantu manusia melakukan aktivitas dengan lebih mudah.</p></div>
+<div class="card rv"><p>Konsep ini diperkenalkan oleh Mark Weiser pada tahun 1988. Ia memiliki gagasan bahwa teknologi komputer seharusnya dapat menyatu dengan kehidupan manusia sehingga pengguna tidak perlu selalu berinteraksi secara langsung dengan perangkat komputer.</p></div>
+<div class="card rv" style="--d:.1s"><p>Dengan adanya Ubiquitous Computing, teknologi dapat bekerja secara otomatis melalui bantuan sensor, jaringan internet, dan perangkat yang saling terhubung. Contohnya, lampu yang dapat menyala secara otomatis ketika seseorang memasuki ruangan.</p></div>
+</div></div></section></div>
+<div class="wave d" style="--x:0"></div>
+
+<section id="karakter" data-s>
+<div class="wrap">
+<span class="pill rv" style="background:var(--lime)">2. Karakteristik</span>
+<h2 class="rv">Karakteristik Ubiquitous Computing</h2>
+<p class="rv" style="margin-bottom:22px">Ubiquitous Computing memiliki beberapa karakteristik, yaitu:</p>
+<div class="chars">
+<div class="tilt rv" style="background:var(--blue);--r:-1.5deg"><h3>1. Tersedia di berbagai tempat</h3><p>Teknologi komputasi dapat ditemukan di berbagai lingkungan, seperti rumah, sekolah, rumah sakit, kantor, dan tempat umum.</p></div>
+<div class="tilt rv" style="background:var(--salmon);--r:1deg;--d:.08s"><h3>2. Terhubung dengan jaringan</h3><p>Perangkat dapat saling terhubung melalui jaringan internet atau jaringan nirkabel untuk bertukar informasi.</p></div>
+<div class="tilt rv" style="background:var(--pink);--r:-1deg;--d:.16s"><h3>3. Berjalan secara otomatis</h3><p>Beberapa perangkat dapat menjalankan tugas tanpa harus selalu diperintah secara langsung oleh pengguna.</p></div>
+<div class="tilt rv" style="background:var(--yellow);--r:1.5deg"><h3>4. Memanfaatkan sensor</h3><p>Sensor digunakan untuk mendeteksi kondisi lingkungan, seperti gerakan, suhu, cahaya, atau keberadaan seseorang.</p></div>
+<div class="tilt rv" style="background:var(--lilac);--r:-1deg;--d:.08s"><h3>5. Memudahkan aktivitas manusia</h3><p>Teknologi dirancang agar dapat membantu pekerjaan manusia menjadi lebih praktis, cepat, dan efisien.</p></div>
+</div></div></section>
+
+<div class="wave"></div>
+<div class="white"><section id="contoh" data-s style="padding-top:30px">
+<div class="wrap">
+<span class="pill rv" style="background:var(--blue)">3. Penerapan</span>
+<h2 class="rv">Contoh Penerapan Ubiquitous Computing</h2>
+<p class="rv" style="margin-bottom:18px">Ubiquitous Computing telah diterapkan dalam berbagai bidang kehidupan. Ketuk kartu untuk membaca selengkapnya.</p>
+<div class="rail rv" id="rail">
+<article class="item"><div class="pic" style="--c:var(--pink)">🏠<span class="tag">a</span></div><h3>Smart Home (Rumah Pintar)</h3><p class="t">Smart Home merupakan rumah yang menggunakan perangkat teknologi untuk membantu mengatur berbagai aktivitas secara otomatis.</p><div class="more"><div><p>Contohnya adalah lampu pintar yang dapat dikendalikan melalui smartphone, AC yang dapat diatur dari jarak jauh, serta sistem keamanan yang menggunakan sensor gerakan.</p><p>Teknologi ini membantu penghuni rumah mengatur lingkungan tempat tinggal dengan lebih mudah dan nyaman.</p></div></div><button class="btn">Selengkapnya</button></article>
+<article class="item"><div class="pic" style="--c:var(--blue)">⌚<span class="tag">b</span></div><h3>Smartwatch (Jam Tangan Pintar)</h3><p class="t">Smartwatch merupakan perangkat yang dapat digunakan pada pergelangan tangan dan memiliki kemampuan komputasi.</p><div class="more"><div><p>Perangkat ini dapat menampilkan waktu, menerima notifikasi dari smartphone, menghitung langkah kaki, serta memantau aktivitas fisik penggunanya.</p><p>Smartwatch menjadi salah satu contoh Ubiquitous Computing karena teknologi komputer terdapat dalam benda yang digunakan sehari-hari.</p></div></div><button class="btn">Selengkapnya</button></article>
+<article class="item"><div class="pic" style="--c:var(--sage)">🏥<span class="tag">c</span></div><h3>Smart Hospital (Rumah Sakit Pintar)</h3><p class="t">Dalam bidang kesehatan, Ubiquitous Computing dapat digunakan untuk membantu pemantauan kondisi pasien.</p><div class="more"><div><p>Contohnya adalah perangkat pemantau kesehatan yang dapat mengukur detak jantung atau suhu tubuh dan mengirimkan informasi kepada tenaga medis.</p><p>Dengan teknologi tersebut, proses pemantauan pasien dapat dilakukan dengan lebih praktis.</p></div></div><button class="btn">Selengkapnya</button></article>
+<article class="item"><div class="pic" style="--c:var(--yellow)">🚦<span class="tag">d</span></div><h3>Smart Transportation (Transportasi Pintar)</h3><p class="t">Ubiquitous Computing juga digunakan dalam sistem transportasi.</p><div class="more"><div><p>Contohnya adalah lampu lalu lintas pintar yang menggunakan sensor untuk membantu mengatur arus kendaraan, serta sistem pembayaran tol elektronik yang memungkinkan pengguna melakukan pembayaran tanpa harus berhenti untuk membayar secara manual.</p><p>Teknologi ini dapat membantu meningkatkan efisiensi dan kenyamanan dalam perjalanan.</p></div></div><button class="btn">Selengkapnya</button></article>
+<article class="item"><div class="pic" style="--c:var(--lilac)">🎓<span class="tag">e</span></div><h3>Smart Campus (Kampus Pintar)</h3><p class="t">Pada lingkungan kampus, Ubiquitous Computing dapat diterapkan melalui penggunaan kartu mahasiswa elektronik, sistem absensi digital, serta jaringan internet yang tersedia di berbagai area kampus.</p><div class="more"><div><p>Contohnya, mahasiswa dapat menggunakan kartu elektronik untuk melakukan absensi atau mengakses fasilitas tertentu.</p></div></div><button class="btn">Selengkapnya</button></article>
+</div>
+<div class="arrows"><button class="btn" id="prev" aria-label="Sebelumnya">←</button><button class="btn" id="next" aria-label="Berikutnya">→</button></div>
+</div></section></div>
+<div class="wave d"></div>
+
+<section id="manfaat" data-s>
+<div class="wrap">
+<span class="pill rv" style="background:var(--yellow)">4. Manfaat</span>
+<h2 class="rv">Manfaat Ubiquitous Computing</h2>
+<p class="rv" style="margin-bottom:20px">Penerapan Ubiquitous Computing memberikan berbagai manfaat bagi kehidupan manusia, antara lain:</p>
+<div class="ben">
+<div class="b rv">Mempermudah aktivitas sehari-hari.</div><div class="b rv" style="--d:.08s">Menghemat waktu dan tenaga.</div>
+<div class="b rv">Membantu pekerjaan berjalan lebih efisien.</div><div class="b rv" style="--d:.08s">Memungkinkan perangkat bekerja secara otomatis.</div>
+<div class="b rv">Memudahkan pertukaran informasi antarperangkat.</div><div class="b rv" style="--d:.08s">Meningkatkan kenyamanan dalam menggunakan teknologi.</div>
+</div>
+<div class="warn rv">🔒 Namun, penerapan teknologi ini juga perlu memperhatikan keamanan data dan privasi pengguna, karena perangkat yang saling terhubung dapat mengumpulkan berbagai informasi.</div>
+</div></section>
+
+<div class="wave"></div>
+<div class="white"><section id="kesimpulan" data-s style="padding-top:30px">
+<div class="wrap sale">
+<div class="blob rv" aria-hidden="true">🌼</div>
+<div class="rv"><span class="pill" style="background:var(--lime)">5. Kesimpulan</span>
+<h2>Teknologi yang menyatu dengan hidup kita</h2>
+<p>Ubiquitous Computing merupakan konsep teknologi komputasi yang hadir di berbagai tempat dan menyatu dengan kehidupan sehari-hari manusia. Teknologi ini memungkinkan perangkat seperti smartphone, smartwatch, sensor, dan peralatan rumah tangga untuk saling terhubung serta membantu aktivitas manusia.</p>
+<p>Penerapan Ubiquitous Computing dapat ditemukan dalam berbagai bidang, seperti rumah pintar, kesehatan, transportasi, dan pendidikan. Dengan adanya teknologi ini, aktivitas manusia dapat dilakukan dengan lebih mudah, praktis, dan efisien.</p>
+<p>Oleh karena itu, Ubiquitous Computing menjadi salah satu perkembangan teknologi yang penting dalam menciptakan lingkungan yang lebih cerdas dan mendukung kebutuhan manusia.</p></div>
+</div></section></div>
+<div class="wave d"></div>
+
+<section id="referensi" data-s>
+<div class="wrap">
+<span class="pill rv" style="background:var(--pink)">Referensi</span>
+<h2 class="rv">Daftar Referensi</h2>
+<ol class="refs">
+<li class="rv">Carnegie Mellon University. Ubiquitous Computing.<br><a href="https://www.hcii.cmu.edu/research-areas/ubiquitous-computing" target="_blank" rel="noopener">https://www.hcii.cmu.edu/research-areas/ubiquitous-computing</a></li>
+<li class="rv">IEEE Technology Navigator. Ubiquitous Computing.<br><a href="https://technav.ieee.org/topic/ubiquitous-computing/" target="_blank" rel="noopener">https://technav.ieee.org/topic/ubiquitous-computing/</a></li>
+<li class="rv">Organisation for Economic Co-operation and Development (OECD). Measuring the Internet of Things – Case Study on the Internet of Things in Healthcare.<br><a href="https://www.oecd.org/en/publications/measuring-the-internet-of-things_021333b7-en/full-report/component-9.html" target="_blank" rel="noopener">https://www.oecd.org/en/publications/measuring-the-internet-of-things_021333b7-en/full-report/component-9.html</a></li>
+</ol>
+<div class="foot rv"><span style="background:var(--pink)">UBIQUITOUS COMPUTING</span><br><span style="background:var(--lime)">TEKNOLOGI DI MANA SAJA</span><br><span style="background:var(--blue)">TERIMA KASIH ✿</span></div>
+<div class="bands" style="height:auto;background:none;text-align:center;font-size:28px;letter-spacing:10px">🌸 ⭐ 🌼 ⭐ 🌸</div>
+</div>
+<div class="credit">Elza Arsya Putri · 8020250092 · Kelas 00</div>
+</section>
+
+<script>
+(function(){
+var nav=document.getElementById('nav');
+function sc(){nav.classList.toggle('small',window.scrollY>60)}
+addEventListener('scroll',sc,{passive:true});sc();
+// marquee
+var m='';for(var i=0;i<24;i++)m+='UBIQUITOUS COMPUTING ✿ ';document.getElementById('mq').textContent=m;
+// reveal
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
+// active links
+var links=document.querySelectorAll('.nav a,.tabs a');
+var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id)})}})},{rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('[data-s]').forEach(function(s){so.observe(s)});
+// smooth anchor
+links.forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();var t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth'})})});
+// card toggle
+document.querySelectorAll('.item .btn').forEach(function(b){b.addEventListener('click',function(){var it=b.closest('.item');it.classList.toggle('open');b.textContent=it.classList.contains('open')?'Tutup':'Selengkapnya'})});
+var rail=document.getElementById('rail');
+document.getElementById('next').onclick=function(){rail.scrollBy({left:330,behavior:'smooth'})};
+document.getElementById('prev').onclick=function(){rail.scrollBy({left:-330,behavior:'smooth'})};
+// click sparkles
+var ic=['🌸','⭐','✨','🌼','☁️','💖'];
+document.addEventListener('click',function(e){
+ if(!e.target.closest('.btn,.card,.tilt,.b,.blob,.author,.tabs a,.nav a'))return;
+ for(var i=0;i<8;i++){var s=document.createElement('span');s.className='sp';s.textContent=ic[Math.floor(Math.random()*ic.length)];
+ var a=Math.PI*2*i/8,d=40+Math.random()*50;
+ s.style.cssText='left:'+e.clientX+'px;top:'+e.clientY+'px;--x:'+Math.cos(a)*d+'px;--y:'+Math.sin(a)*d+'px';
+ document.body.appendChild(s);setTimeout(function(x){x.remove()},900,s)}
+});
+})();
+</script>
+</body>
+</html>
